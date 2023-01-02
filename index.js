@@ -7,7 +7,20 @@ const rest = new REST({ version: '10' }).setToken(TOKEN);
 const commands = [
   {
     name: 'apod',
-    description: 'Replies whith the astronomy picture of the day!',
+    description: 'Replies with the astronomy picture of the day!',
+  },
+
+  {
+    name: 'rover',
+    description: 'Replies with a picture taken by the mars rover on a given day!',
+    options: [
+      {
+        name: 'date',
+        description: 'Earth date of the photo',
+        type: 3,
+        required: true,
+      }
+    ]
   },
 ];
 
