@@ -29,13 +29,25 @@ client.on('interactionCreate', async interaction => {
     const request = require('request');
     request('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?api_key=cQDCapa6pSqUPx6ignf3p2ImqC7t7Lx3n26H5X9M&earth_date='+interaction.options.getString('date'), {json: true}, (err, res, body) => {
       if(err) {return console.log(err); }
+	    
+      else {
+        try {
+          const roverEmbed = new EmbedBuilder()
+          .setColor(0x5D3FD3)
+          .setTitle('Photo taken by Mars '+ body.photos[0].rover.name + ' Rover on ' + interaction.options.getString('date'))
+	       .setImage(body.photos[0].img_src);
 
-      const roverEmbed = new EmbedBuilder()
-      .setColor(0x5D3FD3)
-      .setTitle('Photo taken by Mars '+ body.photos[0].rover.name + ' Rover on ' + interaction.options.getString('date'))
-      .setImage(body.photos[0].img_src);
-
-      interaction.channel.send({ embeds: [roverEmbed]});
+          interaction.channel.send({ embeds: [roverEmbed]});
+        }
+        catch(err) {
+          const errorEmbed = new EmbedBuilder()
+          .setColor(0xFF3633)
+          .setTitle('ERROR!')
+          .setDescription("No photo's were taken on this day :(")
+          .setThumbnail('https://static.thenounproject.com/png/1839927-200.png');
+          interaction.channel.send({ embeds: [errorEmbed]});
+        }
+      }
     });
   }
 });
