@@ -33,7 +33,7 @@ client.on('interactionCreate', async interaction => {
       const roverEmbed = new EmbedBuilder()
       .setColor(0x5D3FD3)
       .setTitle('Photo taken by Mars '+ body.photos[0].rover.name + ' Rover on ' + interaction.options.getString('date'))
-	    .setImage(body.photos[0].img_src);
+      .setImage(body.photos[0].img_src);
 
       interaction.channel.send({ embeds: [roverEmbed]});
     });
