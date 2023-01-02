@@ -12,7 +12,7 @@ const commands = [
 
   {
     name: 'rover',
-    description: 'Replies with a picture taken by the mars rover on a given day!',
+    description: 'Replies with a picture taken by the mars rover on a given day! Use this format: YYYY-MM-DD',
     options: [
       {
         name: 'date',
